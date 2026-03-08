@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="La carte du Café des Lettres — Boissons, plats et gourmandises à Montpellier." />
+  <title>La Carte — Café des Lettres</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  <main>
+
+    <!-- HERO MENU -->
+    <div class="menu-hero page-hero-padded">
+      <div class="menu-hero-content">
+        <span class="section-label">Aux Quatre Horizons</span>
+        <h1 class="section-title">La Carte</h1>
+        <div class="divider divider-center"></div>
+        <p style="font-family:var(--font-fin);font-style:italic;color:rgba(247,242,232,0.8);font-size:1rem;">
+          Café, thés, plats et gourmandises — voyagez dans chaque bouchée
+        </p>
+      </div>
+    </div>
+
+    <!-- FILTRES -->
+    <div class="menu-filters">
+      <button class="filter-btn active" data-filter="all">Tout voir</button>
+      <button class="filter-btn" data-filter="boissons-chaudes">Boissons chaudes</button>
+      <button class="filter-btn" data-filter="boissons-fraiches">Boissons fraîches</button>
+      <button class="filter-btn" data-filter="the">Thés</button>
+      <button class="filter-btn" data-filter="sale">Plats salés</button>
+      <button class="filter-btn" data-filter="gourmandises">Gourmandises</button>
+    </div>
+
+    <!-- CONTENU MENU -->
+    <section class="menu-section">
+
+      <!-- ═══ BOISSONS CHAUDES ═══ -->
+      <div class="menu-category reveal" data-category="boissons-chaudes">
+        <div class="category-header">
+          <span class="category-icon">&#9749;</span>
+          <h2 class="category-title">Café &amp; Boissons chaudes</h2>
+        </div>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Orient Espresso</div>
+              <div class="menu-item-desc">Torréfié ici, cultivé ailleurs</div>
+            </div>
+            <div class="menu-item-price">1,60 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Noisette</div>
+              <div class="menu-item-desc">Espresso &amp; noisette de lait</div>
+            </div>
+            <div class="menu-item-price">1,70 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Café Allongé</div>
+              <div class="menu-item-desc">Fleuve tranquille</div>
+            </div>
+            <div class="menu-item-price">2,00 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Orient Espresso A/R</div>
+              <div class="menu-item-desc">Double espresso</div>
+            </div>
+            <div class="menu-item-price">2,80 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Cappuccino de la Dolce Vita</div>
+              <div class="menu-item-desc">Espresso, lait mousseux, douceur italienne</div>
+            </div>
+            <div class="menu-item-price">3,50 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Café au lait</div>
+              <div class="menu-item-desc">Le classique réconfortant</div>
+            </div>
+            <div class="menu-item-price">3,50 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Chocolat chaud d'hiver</div>
+              <div class="menu-item-desc">Onctueux, réconfortant</div>
+            </div>
+            <div class="menu-item-price">4,00 €</div>
+          </div>
+        </div>
+        <p style="font-family:var(--font-fin);font-size:0.8rem;color:var(--gris);margin-top:1rem;font-style:italic;">
+          Suppléments : Chantilly +0,50 € &nbsp;|&nbsp; Lait végétal ou sirop +1,00 €
+        </p>
+      </div>
+
+      <!-- ═══ BOISSONS FRAÎCHES ═══ -->
+      <div class="menu-category reveal" data-category="boissons-fraiches">
+        <div class="category-header">
+          <span class="category-icon">&#127862;</span>
+          <h2 class="category-title">Boissons Fraîches</h2>
+        </div>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Bouteille d'eau</div>
+              <div class="menu-item-desc">Plate ou pétillante</div>
+            </div>
+            <div class="menu-item-price">1,20 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Canette Pulco</div>
+              <div class="menu-item-desc">Citronnade pétillante</div>
+            </div>
+            <div class="menu-item-price">1,50 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Capri Sun</div>
+              <div class="menu-item-desc">Boisson fruitée sans colorant ni conservateurs</div>
+            </div>
+            <div class="menu-item-price">2,00 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Jus de fruit</div>
+              <div class="menu-item-desc">Fraise, Abricot ou Coco-Ananas</div>
+            </div>
+            <div class="menu-item-price">3,00 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Sirop du Temps qui dure</div>
+              <div class="menu-item-desc">Sirop artisanal du Sud — Fraise, Cerise, Melon, Passion, Figue, Mimosa</div>
+            </div>
+            <div class="menu-item-price">3,00 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Café frappé</div>
+              <div class="menu-item-desc">Café glacé, onctueux</div>
+            </div>
+            <div class="menu-item-price">4,00 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Jus de Panacée Gingembre</div>
+              <div class="menu-item-desc">Ginger beer maison, vivifiant</div>
+            </div>
+            <div class="menu-item-price">4,00 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Lassi Nature de Shakti</div>
+              <div class="menu-item-desc">Boisson indienne au yogourt, servi bien froid — facilite la digestion</div>
+            </div>
+            <div class="menu-item-price">5,00 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Lassi Mangue de Mooglie</div>
+              <div class="menu-item-desc">Yogourt et mangue, servi bien froid</div>
+            </div>
+            <div class="menu-item-price">5,50 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Magic Potter Shakes</div>
+              <div class="menu-item-desc">Milk shake — Chocolat, Fraise, Vanille ou Caramel</div>
+            </div>
+            <div class="menu-item-price">5,50 €</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ THÉS ═══ -->
+      <div class="menu-category reveal" data-category="the">
+        <div class="category-header">
+          <span class="category-icon">&#127861;</span>
+          <h2 class="category-title">Thés &amp; Infusions</h2>
+        </div>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Le thé de ma Tante</div>
+              <div class="menu-item-desc">Vert, Noir ou Citron</div>
+            </div>
+            <div class="menu-item-price">2,50 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Thé à la menthe de Shéhérazade</div>
+              <div class="menu-item-desc">Menthe fraîche, douceur orientale</div>
+            </div>
+            <div class="menu-item-price">3,00 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Thé Detox "Kusmi Tea" — Le High Feel Good</div>
+              <div class="menu-item-desc">Mélange détox sélectionné Kusmi Tea</div>
+            </div>
+            <div class="menu-item-price">3,50 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Ice Tea de Croc Blanc</div>
+              <div class="menu-item-desc">Thé glacé fait maison</div>
+            </div>
+            <div class="menu-item-price">4,00 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Delhi Chaï de Shankar</div>
+              <div class="menu-item-desc">Chaï aux 5 épices — froid ou chaud</div>
+            </div>
+            <div class="menu-item-price">5,00 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Matcha Latte de Kintaro</div>
+              <div class="menu-item-desc">Matcha ceremonial — froid ou chaud</div>
+            </div>
+            <div class="menu-item-price">5,50 €</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ PLATS SALÉS ═══ -->
+      <div class="menu-category reveal" data-category="sale">
+        <div class="category-header">
+          <span class="category-icon">&#127857;</span>
+          <h2 class="category-title">Salé</h2>
+        </div>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Navette au thon</div>
+              <div class="menu-item-desc">Petit pain garni, thon mariné</div>
+            </div>
+            <div class="menu-item-price">3,10 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Navette au saumon</div>
+              <div class="menu-item-desc">Petit pain garni, saumon frais</div>
+            </div>
+            <div class="menu-item-price">3,50 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Chausson Frita</div>
+              <div class="menu-item-desc">Saveur salsa mexicaine — mélange poivron tomate</div>
+            </div>
+            <div class="menu-item-price">4,20 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Croque-rond végétarien</div>
+              <div class="menu-item-desc">Tomate, chèvre, béchamel au basilic, emmental</div>
+            </div>
+            <div class="menu-item-price">4,60 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Croque-Monsieur à la dinde</div>
+              <div class="menu-item-desc">Dinde halal, emmental, béchamel</div>
+            </div>
+            <div class="menu-item-price">4,90 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">The Bun Bolly</div>
+              <div class="menu-item-desc">Bun au poulet curry</div>
+            </div>
+            <div class="menu-item-price">6,00 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Brooklyn Follies Bun</div>
+              <div class="menu-item-desc">Bun garni saumon, avocat et condiments</div>
+            </div>
+            <div class="menu-item-price">6,50 €</div>
+          </div>
+        </div>
+
+        <!-- Sous-catégorie Fusion Bowls -->
+        <div class="menu-subcategory">
+          <div class="menu-subcategory-title">Fusion Bowls des Pokémons &mdash; servis avec riz et crudités</div>
+          <div class="menu-grid">
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-name">Chicken Takatak</div>
+                <div class="menu-item-desc">Poulet aux saveurs du nord de l'Inde</div>
+              </div>
+              <div class="menu-item-price">10,00 €</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-name">Crispy if You Can</div>
+                <div class="menu-item-desc">Poulet pané sweet chili</div>
+              </div>
+              <div class="menu-item-price">10,00 €</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-info">
+                <div class="menu-item-name">Chole</div>
+                <div class="menu-item-desc">Pois chiches, coco, saveurs du sud de l'Inde — végétarien</div>
+              </div>
+              <div class="menu-item-price">10,00 €</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ GOURMANDISES ═══ -->
+      <div class="menu-category reveal" data-category="gourmandises">
+        <div class="category-header">
+          <span class="category-icon">&#127852;</span>
+          <h2 class="category-title">Gourmandises</h2>
+        </div>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Mini-Beignets Minions Nature</div>
+              <div class="menu-item-desc">Petits beignets dorés nature</div>
+            </div>
+            <div class="menu-item-price">1,00 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Mini-Beignets Minions Fruits rouges</div>
+              <div class="menu-item-desc">Petits beignets fourrés fruits rouges</div>
+            </div>
+            <div class="menu-item-price">1,30 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Madeleine de Marcel — Nature</div>
+              <div class="menu-item-desc">Excellente ! Recette maison</div>
+            </div>
+            <div class="menu-item-price">1,10 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Madeleine de Marcel — Caramel</div>
+              <div class="menu-item-desc">Madeleine cœur caramel beurre salé</div>
+            </div>
+            <div class="menu-item-price">1,30 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Bonbons qui durent</div>
+              <div class="menu-item-desc">Fraise, pomme, caramel ou myrtille</div>
+            </div>
+            <div class="menu-item-price">1,80 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Paquet de la chocolaterie</div>
+              <div class="menu-item-desc">Daim, Milka, oursons ou Kinder Bueno</div>
+            </div>
+            <div class="menu-item-price">2,00 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Gâteau Tigré au chocolat</div>
+              <div class="menu-item-desc">Moelleux chocolat, cœur fondant</div>
+            </div>
+            <div class="menu-item-price">2,30 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Dattes "Medjool" x2</div>
+              <div class="menu-item-desc">Succulentes ! Dattes premium</div>
+            </div>
+            <div class="menu-item-price">2,50 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Financier Vanille miel</div>
+              <div class="menu-item-desc">Moelleux aux amandes, vanille et miel</div>
+            </div>
+            <div class="menu-item-price">2,80 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Muffin</div>
+              <div class="menu-item-desc">Fruits rouges ou Oreo</div>
+            </div>
+            <div class="menu-item-price">3,50 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Tartelette Citron meringuée</div>
+              <div class="menu-item-desc">La Reine des Neiges — acidulée et légère</div>
+            </div>
+            <div class="menu-item-price">4,00 €</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-info">
+              <div class="menu-item-name">Tartelette chocolat ganache</div>
+              <div class="menu-item-desc">Ganache fondante, pâte sablée</div>
+            </div>
+            <div class="menu-item-price">4,00 €</div>
+          </div>
+        </div>
+        <p style="font-family:var(--font-fin);font-size:0.8rem;color:var(--gris);margin-top:1rem;font-style:italic;">
+          Supplément Chantilly +0,50 €
+        </p>
+      </div>
+
+    </section>
+
+    <!-- PHILOSOPHIE -->
+    <div class="menu-philosophy">
+      <blockquote>
+        Aux Quatre Horizons, nous mêlons l'ici et l'ailleurs. Nos saveurs voyagent, nos inspirations se rencontrent, nos traditions dialoguent.
+        <cite>— Le Café des Lettres</cite>
+      </blockquote>
+    </div>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>
