@@ -76,7 +76,7 @@ const FOOTER_HTML = `
       <h4>Nous trouver</h4>
       <div class="footer-map-box">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2888.5!2d3.8954!3d43.5999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b6af3c8e0b9a8b%3A0x6e2f1a2e3b4c5d6e!2sM%C3%A9diath%C3%A8que+%C3%89mile+Zola!5e0!3m2!1sfr!2sfr!4v1"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d23068.721276861623!2d3.817472!3d43.71906559999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b6ac269c6b91f5%3A0x4aacb231a59d8686!2zTcOpZGlhdGjDqHF1ZSDDiW1pbGUgWm9sYQ!5e0!3m2!1sfr!2sfr!4v1773001075966!5m2!1sfr!2sfr"
           width="100%"
           height="100%"
           style="border:0;display:block;"
