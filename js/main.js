@@ -1,6 +1,16 @@
 /* =========================================
-   CAFÉ DES LETTRES — main.js
+   CAFÉ DES LETTRES — main.js (v2)
+   Ajout : chargement dynamique prix/horaires
+   via Firebase REST API (sans SDK)
    ========================================= */
+
+/* ─────────────────────────────────────────
+   CONFIGURATION FIREBASE
+   Remplacez cette URL par celle de votre
+   projet Firebase (voir firebase-setup.md)
+───────────────────────────────────────── */
+const FIREBASE_DB_URL = 'VOTRE_FIREBASE_DATABASE_URL';
+// Exemple : 'https://cafe-des-lettres-default-rtdb.europe-west1.firebasedatabase.app'
 
 /* --- Navbar HTML partagé --- */
 const NAVBAR_HTML = `
@@ -69,7 +79,7 @@ const FOOTER_HTML = `
       </div>
       <div class="footer-contact-item">
         <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-        <span>Montpellier, France</span>
+        <span>Médiathèque Émile Zola, 34000 Montpellier, France</span>
       </div>
     </div>
     <div class="footer-col footer-col-map">
@@ -94,6 +104,54 @@ const FOOTER_HTML = `
   </div>
 </footer>
 `;
+
+/* ─────────────────────────────────────────────────────────────
+   CHARGEMENT DYNAMIQUE — Firebase REST API (sans SDK)
+   
+   Principe : on fait un simple fetch() sur le endpoint REST
+   public de Firebase. Pas de bibliothèque supplémentaire.
+   Les prix dans menu.html et les horaires dans contact.html
+   sont ciblés via data-price-key / data-hour-key.
+   
+   Si Firebase n'est pas configuré, le contenu statique HTML
+   s'affiche normalement (fallback gracieux).
+─────────────────────────────────────────────────────────────── */
+async function loadDynamicData() {
+  // Pas encore configuré → on ne fait rien
+  if (!FIREBASE_DB_URL || FIREBASE_DB_URL === 'VOTRE_FIREBASE_DATABASE_URL') return;
+
+  try {
+    const res = await fetch(`${FIREBASE_DB_URL}/config.json`, {
+      cache: 'no-cache'
+    });
+    if (!res.ok) return;
+    const data = await res.json();
+    if (!data) return;
+
+    // ── Patch des prix ──────────────────────────────────────
+    // Cible tous les éléments portant data-price-key dans la page
+    if (data.prices) {
+      document.querySelectorAll('[data-price-key]').forEach(el => {
+        const val = data.prices[el.dataset.priceKey];
+        if (val !== undefined) el.textContent = val;
+      });
+    }
+
+    // ── Patch des horaires ──────────────────────────────────
+    // Cible tous les éléments portant data-hour-key dans la page
+    if (data.hours) {
+      document.querySelectorAll('[data-hour-key]').forEach(el => {
+        const val = data.hours[el.dataset.hourKey];
+        if (val !== undefined) el.textContent = val;
+      });
+    }
+
+  } catch (e) {
+    // Réseau indisponible ou Firebase down → affichage statique
+    console.warn('[CaféDesLettres] Firebase non disponible — données statiques utilisées.');
+  }
+}
+
 
 /* --- Initialisation principale --- */
 document.addEventListener('DOMContentLoaded', () => {
@@ -166,5 +224,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 1200);
     });
   }
+
+  // ── Chargement des données dynamiques Firebase ──────────
+  loadDynamicData();
 
 });
