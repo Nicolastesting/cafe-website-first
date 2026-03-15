@@ -1,16 +1,18 @@
 /* =========================================
-   CAFÉ DES LETTRES — main.js (v2)
-   Ajout : chargement dynamique prix/horaires
-   via Firebase REST API (sans SDK)
+   CAFÉ DES LETTRES — main.js (v3)
+   Back-end : PocketBase (auto-hébergé)
    ========================================= */
 
 /* ─────────────────────────────────────────
-   CONFIGURATION FIREBASE
-   Remplacez cette URL par celle de votre
-   projet Firebase (voir firebase-setup.md)
+   CONFIGURATION POCKETBASE
+   Pointez vers votre instance PocketBase.
+   En prod : votre domaine/sous-domaine.
+   En dev local : http://localhost:8090
 ───────────────────────────────────────── */
-const FIREBASE_DB_URL = 'VOTRE_FIREBASE_DATABASE_URL';
-// Exemple : 'https://cafe-des-lettres-default-rtdb.europe-west1.firebasedatabase.app'
+const PB_URL = 'http://192.168.1.50';
+// Exemple prod  : 'https://api.cafedeslettres.fr'
+// Exemple local : 'http://localhost:8090'
+
 
 /* --- Navbar HTML partagé --- */
 const NAVBAR_HTML = `
@@ -105,50 +107,53 @@ const FOOTER_HTML = `
 </footer>
 `;
 
-/* ─────────────────────────────────────────────────────────────
-   CHARGEMENT DYNAMIQUE — Firebase REST API (sans SDK)
-   
-   Principe : on fait un simple fetch() sur le endpoint REST
-   public de Firebase. Pas de bibliothèque supplémentaire.
-   Les prix dans menu.html et les horaires dans contact.html
-   sont ciblés via data-price-key / data-hour-key.
-   
-   Si Firebase n'est pas configuré, le contenu statique HTML
-   s'affiche normalement (fallback gracieux).
-─────────────────────────────────────────────────────────────── */
+/* ──────────────────────────────────────────────────────────
+   CHARGEMENT DYNAMIQUE — PocketBase REST API (sans SDK)
+
+   Architecture :
+   • PocketBase expose une collection "site_config"
+     avec un enregistrement unique contenant :
+       - prices  (champ JSON) : { "orient-espresso": "1,60 €", … }
+       - hours   (champ JSON) : { "lundi": "08h30 – 18h00", … }
+   • Règle de lecture : publique (aucun token nécessaire).
+   • Règle d'écriture : restreinte à l'admin PocketBase.
+
+   Si PocketBase est inaccessible → le HTML statique
+   s'affiche normalement (fallback gracieux, zéro erreur visible).
+────────────────────────────────────────────────────────── */
 async function loadDynamicData() {
-  // Pas encore configuré → on ne fait rien
-  if (!FIREBASE_DB_URL || FIREBASE_DB_URL === 'VOTRE_FIREBASE_DATABASE_URL') return;
+  if (!PB_URL || PB_URL.includes('votredomaine')) return;
 
   try {
-    const res = await fetch(`${FIREBASE_DB_URL}/config.json`, {
-      cache: 'no-cache'
-    });
+    const res = await fetch(
+      `${PB_URL}/api/collections/site_config/records?perPage=1`,
+      { cache: 'no-cache' }
+    );
     if (!res.ok) return;
-    const data = await res.json();
-    if (!data) return;
 
-    // ── Patch des prix ──────────────────────────────────────
-    // Cible tous les éléments portant data-price-key dans la page
-    if (data.prices) {
+    const json = await res.json();
+    if (!json.items || json.items.length === 0) return;
+
+    const record = json.items[0];
+
+    // ── Patch des prix ─────────────────────────────────
+    if (record.prices && typeof record.prices === 'object') {
       document.querySelectorAll('[data-price-key]').forEach(el => {
-        const val = data.prices[el.dataset.priceKey];
-        if (val !== undefined) el.textContent = val;
+        const val = record.prices[el.dataset.priceKey];
+        if (val !== undefined && val !== '') el.textContent = val;
       });
     }
 
-    // ── Patch des horaires ──────────────────────────────────
-    // Cible tous les éléments portant data-hour-key dans la page
-    if (data.hours) {
+    // ── Patch des horaires ─────────────────────────────
+    if (record.hours && typeof record.hours === 'object') {
       document.querySelectorAll('[data-hour-key]').forEach(el => {
-        const val = data.hours[el.dataset.hourKey];
-        if (val !== undefined) el.textContent = val;
+        const val = record.hours[el.dataset.hourKey];
+        if (val !== undefined && val !== '') el.textContent = val;
       });
     }
 
   } catch (e) {
-    // Réseau indisponible ou Firebase down → affichage statique
-    console.warn('[CaféDesLettres] Firebase non disponible — données statiques utilisées.');
+    console.warn('[CaféDesLettres] PocketBase non disponible — données statiques utilisées.');
   }
 }
 
@@ -156,21 +161,17 @@ async function loadDynamicData() {
 /* --- Initialisation principale --- */
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Injection navbar
   const navHolder = document.getElementById('navbar-placeholder');
   if (navHolder) navHolder.innerHTML = NAVBAR_HTML;
 
-  // Injection footer
   const footHolder = document.getElementById('footer-placeholder');
   if (footHolder) footHolder.innerHTML = FOOTER_HTML;
 
-  // Active link sur la page courante
   const page = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-links a, .nav-mobile a').forEach(a => {
     if (a.getAttribute('href') === page) a.classList.add('active');
   });
 
-  // Effet scroll navbar
   const navbar = document.getElementById('navbar');
   if (navbar) {
     const scrollHandler = () => navbar.classList.toggle('scrolled', window.scrollY > 60);
@@ -178,7 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
     scrollHandler();
   }
 
-  // Menu mobile
   const toggle = document.getElementById('navToggle');
   const mobile = document.getElementById('navMobile');
   const close  = document.getElementById('navClose');
@@ -186,7 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (close  && mobile) close.addEventListener('click',  () => { mobile.classList.remove('open'); document.body.style.overflow = ''; });
   if (mobile) mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mobile.classList.remove('open'); document.body.style.overflow = ''; }));
 
-  // Reveal au scroll
   const reveals = document.querySelectorAll('.reveal');
   if (reveals.length) {
     const obs = new IntersectionObserver(entries => {
@@ -195,7 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
     reveals.forEach(el => obs.observe(el));
   }
 
-  // Filtres menu
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -207,7 +205,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Formulaire contact
   const form    = document.getElementById('contactForm');
   const success = document.getElementById('formSuccess');
   if (form) {
@@ -225,7 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ── Chargement des données dynamiques Firebase ──────────
   loadDynamicData();
 
 });
